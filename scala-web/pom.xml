@@ -1,0 +1,61 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>de.geeksession.web</groupId>
+    <artifactId>scala-web</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>war</packaging>
+
+    <parent>
+        <artifactId>simple-java-scala-project</artifactId>
+        <groupId>de.geeksession</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath>..</relativePath>
+    </parent>
+
+    <properties>
+        <!-- the set scala version is set in the zeugmussweg-version-management pom file !! -->
+        <version.lift>2.5-RC6</version.lift>
+        <version.lift.scala>2.10</version.lift.scala>
+        <version.lift.module>2.5</version.lift.module>
+
+        <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>net.liftweb</groupId>
+                <artifactId>lift-mapper_${version.lift.scala}</artifactId>
+                <version>${version.lift}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>net.liftmodules</groupId>
+                <artifactId>lift-jquery-module_${version.lift.module}_${version.lift.scala}</artifactId>
+                <version>2.4</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>de.geeksession.services</groupId>
+            <artifactId>java-service</artifactId>
+            <type>ejb-client</type>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>net.liftweb</groupId>
+            <artifactId>lift-mapper_${version.lift.scala}</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.liftmodules</groupId>
+            <artifactId>lift-jquery-module_${version.lift.module}_${version.lift.scala}</artifactId>
+        </dependency>
+
+    </dependencies>
+
+</project>

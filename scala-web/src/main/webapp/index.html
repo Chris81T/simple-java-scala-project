@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<!--[if IE 8]> 				 <html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+
+<head>
+	<meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <title>Foundation 4</title>
+
+  
+  <link rel="stylesheet" href="css/foundation.css" />
+  
+
+  <script src="js/vendor/custom.modernizr.js"></script>
+  <script src="angular-1.0.7/angular.js"></script>
+
+</head>
+<body ng-app>
+
+    <div class="row">
+        <div class="large-12 columns">
+            <h2>Welcome to the Geek Session</h2>
+            <p>This is a simple calculator example, using an EJB service / scala backend to calculate the result</p>
+            <hr />
+        </div>
+    </div>
+
+    <div class="row" ng-controller="CalcCtrl">
+        <div class="large-8 columns">
+
+            <div class="row">
+                <div class="large-4 columns"><input ng-model="addA"></div>
+                <div class="large-1 columns"><strong>+</strong></div>
+                <div class="large-4 columns"><input ng-model="addB"></div>
+                <div class="large-1 columns"><strong>=</strong></div>
+                <div class="large-2 columns"><button class="tiny button" ng-click="calc('plus', addA, addB)">calculate</button></div>
+            </div>
+
+            <div class="row">
+                <div class="large-4 columns"><input ng-model="subA"></div>
+                <div class="large-1 columns"><strong>-</strong></div>
+                <div class="large-4 columns"><input ng-model="subB"></div>
+                <div class="large-1 columns"><strong>=</strong></div>
+                <div class="large-2 columns"><button class="tiny button" ng-click="calc('plus', subA, subB)">calculate</button></div>
+            </div>
+
+            <div class="row">
+                <div class="large-4 columns"><input ng-model="mulA"></div>
+                <div class="large-1 columns"><strong>*</strong></div>
+                <div class="large-4 columns"><input ng-model="mulB"></div>
+                <div class="large-1 columns"><strong>=</strong></div>
+                <div class="large-2 columns"><button class="tiny button" ng-click="calc('mul', mulA, mulB)">calculate</button></div>
+            </div>
+
+            <div class="row">
+                <div class="large-4 columns"><input ng-model="divA"></div>
+                <div class="large-1 columns"><strong>/</strong></div>
+                <div class="large-4 columns"><input ng-model="divB"></div>
+                <div class="large-1 columns"><strong>=</strong></div>
+                <div class="large-2 columns"><button class="tiny button" ng-click="calc('div', divA, divB)">calculate</button></div>
+            </div>
+
+            <div class="row">
+                <div class="large-4 columns"><input ng-model="modA"></div>
+                <div class="large-1 columns"><strong>%</strong></div>
+                <div class="large-4 columns"><input ng-model="modB"></div>
+                <div class="large-1 columns"><strong>=</strong></div>
+                <div class="large-2 columns"><button class="tiny button" ng-click="calc('modulo', modA, modB)">calculate</button></div>
+            </div>
+
+        </div>
+        <div class="large-4 columns">
+            <div class="row">
+                <h3 class="subheader">The last result</h3>
+                <strong ng-hide="result">Try it out!</strong>
+                <strong ng-show="result">{{result}}</strong>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        function CalcCtrl($scope, $http) {
+
+            $scope.calc = function(operation, a, b) {
+                $http({method: 'GET', url: 'api/calc/' + a + '/' + operation + '/' + b}).
+                    success(function(data, status, headers, config) {
+                        $scope.result = data;
+                    }).
+                    error(function(data, status, headers, config) {
+                        // called asynchronously if an error occurs
+                        // or server returns response with an error status.
+                        alert("Something went wrong! See status = " + status);
+                    });
+            }
+
+        }
+
+    </script>
+
+  <script>
+  document.write('<script src=' +
+  ('__proto__' in {} ? 'js/vendor/zepto' : 'js/vendor/jquery') +
+  '.js><\/script>')
+  </script>
+  
+  <script src="js/foundation.min.js"></script>
+  <!--
+  
+  <script src="js/foundation/foundation.js"></script>
+  
+  <script src="js/foundation/foundation.alerts.js"></script>
+  
+  <script src="js/foundation/foundation.clearing.js"></script>
+  
+  <script src="js/foundation/foundation.cookie.js"></script>
+  
+  <script src="js/foundation/foundation.dropdown.js"></script>
+  
+  <script src="js/foundation/foundation.forms.js"></script>
+  
+  <script src="js/foundation/foundation.joyride.js"></script>
+  
+  <script src="js/foundation/foundation.magellan.js"></script>
+  
+  <script src="js/foundation/foundation.orbit.js"></script>
+  
+  <script src="js/foundation/foundation.placeholder.js"></script>
+  
+  <script src="js/foundation/foundation.reveal.js"></script>
+  
+  <script src="js/foundation/foundation.section.js"></script>
+  
+  <script src="js/foundation/foundation.tooltips.js"></script>
+  
+  <script src="js/foundation/foundation.topbar.js"></script>
+  
+  <script src="js/foundation/foundation.interchange.js"></script>
+  
+  -->
+  
+  <script>
+    $(document).foundation();
+  </script>
+</body>
+</html>

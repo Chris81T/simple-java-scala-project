@@ -1,0 +1,105 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>de.geeksession</groupId>
+    <artifactId>simple-ear</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>ear</packaging>
+
+    <parent>
+        <artifactId>simple-java-scala-project</artifactId>
+        <groupId>de.geeksession</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath>..</relativePath>
+    </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>de.geeksession.backend</groupId>
+            <artifactId>calculator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>de.geeksession.services</groupId>
+            <artifactId>java-service</artifactId>
+            <type>ejb</type>
+        </dependency>
+        <dependency>
+            <groupId>de.geeksession.web</groupId>
+            <artifactId>scala-web</artifactId>
+            <type>war</type>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <!-- set the final ear filename without version number -->
+        <finalName>${artifactId}</finalName>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-ear-plugin</artifactId>
+                <configuration>
+                    <defaultLibBundleDir>lib</defaultLibBundleDir>
+                    <version>6</version>
+
+                    <!-- prevent the version number for each module, also for the ear package -->
+                    <fileNameMapping>no-version</fileNameMapping>
+
+                    <modules>
+                        <jarModule>
+                            <groupId>de.geeksession.backend</groupId>
+                            <artifactId>calculator</artifactId>
+                        </jarModule>
+                        <ejbModule>
+                            <groupId>de.geeksession.services</groupId>
+                            <artifactId>java-service</artifactId>
+                        </ejbModule>
+                        <webModule>
+                            <groupId>de.geeksession.web</groupId>
+                            <artifactId>scala-web</artifactId>
+                            <contextRoot>/geeksession</contextRoot>
+                        </webModule>
+
+                        <!-- third party lib's -->
+                        <jarModule>
+                            <groupId>org.slf4j</groupId>
+                            <artifactId>slf4j-api</artifactId>
+                        </jarModule>
+                        <jarModule>
+                            <groupId>org.slf4j</groupId>
+                            <artifactId>slf4j-log4j12</artifactId>
+                        </jarModule>
+                        <jarModule>
+                            <groupId>log4j</groupId>
+                            <artifactId>log4j</artifactId>
+                        </jarModule>
+                        <jarModule>
+                            <groupId>joda-time</groupId>
+                            <artifactId>joda-time</artifactId>
+                        </jarModule>
+                        <jarModule>
+                            <groupId>org.scala-lang</groupId>
+                            <artifactId>scala-library</artifactId>
+                        </jarModule>
+                    </modules>
+                </configuration>
+            </plugin>
+
+            <!-- how to deploy: mvn ...
+                jboss-as:add-resource adds a resource.
+                jboss-as:deploy deploys the application to.
+                jboss-as:deploy-artifact deploys an arbitrary artifact to the server.
+                jboss-as:redeploy redeploys the application.
+                jboss-as:undeploy undeploys the application.
+                jboss-as:run runs the application server and deploys your application.
+                jboss-as:execute-commands executes commands on the running server.
+             source: https://docs.jboss.org/jbossas/7/plugins/maven/latest/
+             -->
+            <plugin>
+                <groupId>org.jboss.as.plugins</groupId>
+                <artifactId>jboss-as-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
