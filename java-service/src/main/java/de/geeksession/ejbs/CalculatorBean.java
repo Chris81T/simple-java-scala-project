@@ -4,6 +4,8 @@ import de.geeksession.Calculator;
 import de.geeksession.CalculatorService;
 
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,6 +15,7 @@ import javax.ejb.Stateless;
  * To change this template use File | Settings | File Templates.
  */
 @Stateless
+@TransactionAttribute(TransactionAttributeType.MANDATORY)
 public class CalculatorBean implements CalculatorService {
 
     @Override
