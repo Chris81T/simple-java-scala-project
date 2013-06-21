@@ -32,7 +32,7 @@
 
     <build>
         <!-- set the final ear filename without version number -->
-        <finalName>${artifactId}</finalName>
+        <finalName>simple-ear</finalName>
 
         <plugins>
             <plugin>
